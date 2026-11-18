@@ -1,0 +1,226 @@
+name: ymm-knowledge-exchange
+
+x-common-service: &common-service
+  restart: unless-stopped
+  env_file:
+    - .env
+  networks:
+    - ymm-network
+
+x-common-environment: &common-environment
+  SPRING_PROFILES_ACTIVE: dev
+  JAVA_TOOL_OPTIONS: >-
+    -Xms128m
+    -Xmx512m
+    -Dfile.encoding=UTF-8
+    -Duser.timezone=Asia/Shanghai
+    -Drocketmq.client.logUseSlf4j=true
+
+services:
+  ymm-knowledge-exchange-gateway:
+    <<: *common-service
+    image: ymm/gateway:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODULE: ymm-knowledge-exchange-gateway
+    environment:
+      <<: *common-environment
+    ports:
+      - "8081:8081"
+    expose:
+      - "8081"
+
+  ymm-knowledge-exchange-auth:
+    <<: *common-service
+    image: ymm/auth:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODULE: ymm-knowledge-exchange-auth
+    environment:
+      <<: *common-environment
+    expose:
+      - "8080"
+
+  ymm-distributed-id-generator:
+    <<: *common-service
+    image: ymm/id-generator:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODULE: ymm-distributed-id-generator/ymm-distributed-id-generator-biz
+    environment:
+      <<: *common-environment
+    expose:
+      - "8087"
+
+  ymm-user-biz:
+    <<: *common-service
+    image: ymm/user-biz:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODULE: ymm-knowledge-exchange-user/ymm-user-biz
+    environment:
+      <<: *common-environment
+    expose:
+      - "8083"
+
+  ymm-text-biz:
+    <<: *common-service
+    image: ymm/text-biz:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODULE: ymm-knowledge-exchange-text/ymm-text-biz
+    environment:
+      <<: *common-environment
+    expose:
+      - "8085"
+
+  ymm-note-biz:
+    <<: *common-service
+    image: ymm/note-biz:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODULE: ymm-knowledge-exchange-note/ymm-note-biz
+    environment:
+      <<: *common-environment
+      JAVA_TOOL_OPTIONS: >-
+        -Xms128m
+        -Xmx512m
+        -Dfile.encoding=UTF-8
+        -Duser.timezone=Asia/Shanghai
+        -Drocketmq.client.logUseSlf4j=true
+        -Drocketmq.client.localOffsetStoreDir=/app/data/rocketmq-offsets
+    volumes:
+      - note-rocketmq-offsets:/app/data/rocketmq-offsets
+    expose:
+      - "8089"
+
+  ymm-user-relation-biz:
+    <<: *common-service
+    image: ymm/user-relation-biz:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODULE: ymm-knowledge-exchange-user-relation/ymm-user-relation-biz
+    environment:
+      <<: *common-environment
+    expose:
+      - "8093"
+
+  ymm-count-biz:
+    <<: *common-service
+    image: ymm/count-biz:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODULE: ymm-knowledge-exchange-count/ymm-count-biz
+    environment:
+      <<: *common-environment
+    expose:
+      - "8094"
+
+  ymm-search-biz:
+    <<: *common-service
+    image: ymm/search-biz:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODULE: ymm-knowledge-exchange-search/ymm-search-biz
+    environment:
+      <<: *common-environment
+      CANAL_ADDRESS: ${CANAL_ADDRESS:-host.docker.internal:11111}
+      ELASTICSEARCH_HOTUPDATEEXTDICT: /data/es/mydict_hot_update.dic
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - "${ES_DICTIONARY_PATH:-./data/mydict_hot_update.dic}:/data/es/mydict_hot_update.dic"
+    expose:
+      - "8097"
+
+  ymm-oss-biz:
+    <<: *common-service
+    image: ymm/oss-biz:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODULE: ymm-knowledge-exchange-oss/ymm-oss-biz
+    environment:
+      <<: *common-environment
+    expose:
+      - "8098"
+
+  ymm-ai-biz:
+    <<: *common-service
+    image: ymm/ai-biz:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODULE: ymm-knowledge-exchange-ai/ymm-ai-biz
+        INSTALL_PYTHON: "true"
+    environment:
+      <<: *common-environment
+      DASHSCOPE_CHAT_MODEL: ${DASHSCOPE_CHAT_MODEL:-qwen3.8-max}
+      DASHSCOPE_VISION_MODEL: ${DASHSCOPE_VISION_MODEL:-qwen3-vl-plus}
+      DASHSCOPE_MODERATION_TEXT_MODEL: ${DASHSCOPE_MODERATION_TEXT_MODEL:-qwen3.8-flash}
+      DASHSCOPE_MODERATION_VISION_MODEL: ${DASHSCOPE_MODERATION_VISION_MODEL:-qwen3-vl-plus}
+      DASHSCOPE_STRUCTURED_MODEL: ${DASHSCOPE_STRUCTURED_MODEL:-qwen3.8-flash}
+      DASHSCOPE_IMAGE_MODEL: ${DASHSCOPE_IMAGE_MODEL:-qwen-image-3.0}
+      DASHSCOPE_PUBLISH_IMAGE_MODEL: ${DASHSCOPE_PUBLISH_IMAGE_MODEL:-qwen-image-3.0}
+      DASHSCOPE_PUBLISH_IMAGE_FALLBACK_MODEL: ${DASHSCOPE_PUBLISH_IMAGE_FALLBACK_MODEL:-qwen-image-3.0-pro}
+      JAVA_TOOL_OPTIONS: >-
+        -Xms256m
+        -Xmx1024m
+        -Dfile.encoding=UTF-8
+        -Duser.timezone=Asia/Shanghai
+        -Drocketmq.client.logUseSlf4j=true
+    expose:
+      - "8099"
+
+  ymm-notification-biz:
+    <<: *common-service
+    image: ymm/notification-biz:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODULE: ymm-knowledge-exchange-notification/ymm-notification-biz
+    environment:
+      <<: *common-environment
+    expose:
+      - "8100"
+
+  ymm-comment-biz:
+    <<: *common-service
+    image: ymm/comment-biz:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODULE: ymm-knowledge-exchange-comment/ymm-comment-biz
+    environment:
+      <<: *common-environment
+    expose:
+      - "8101"
+
+networks:
+  ymm-network:
+    driver: bridge
+
+volumes:
+  note-rocketmq-offsets:

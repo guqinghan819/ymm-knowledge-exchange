@@ -1,0 +1,31 @@
+.analysis-panel { padding: 28px; min-height: 600px; background: #fff; color: #24374d; }
+.analysis-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 26px; }
+.analysis-header h2 { margin: 0; font-size: 19px; font-weight: 600; }
+.analysis-header p { margin: 7px 0 0; color: #8795a7; font-size: 12px; line-height: 1.8; }
+.header-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.ghost-btn, .analysis-state button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 9px 13px; border: 1px solid #e0e7ef; border-radius: 7px; color: #607c9d; background: #fff; font-size: 12px; white-space: nowrap; cursor: pointer; }
+.ghost-btn:hover, .analysis-state button:hover { background: #f4f7fb; border-color: #bdcde0; }
+.ghost-btn:disabled { opacity: .5; cursor: wait; }
+.period-switch { display: flex; padding: 3px; gap: 3px; border: 1px solid #e7ecf3; border-radius: 8px; background: #f5f7fa; }
+.period-switch button { padding: 7px 12px; border: 0; border-radius: 5px; color: #8391a4; background: transparent; font-size: 12px; cursor: pointer; }
+.period-switch button.active { color: #365f91; background: #fff; box-shadow: 0 1px 4px #283e5710; }
+.period-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 0 0 16px; font-size: 11px; color: #8a98a9; }
+.period-meta strong { font-size: 11px; font-weight: 500; color: #627d9e; }
+.period-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-bottom: 28px; }
+.period-card { position: relative; padding: 22px 24px; text-align: left; border: 1px solid #e7ecf3; border-radius: 10px; background: #fbfcfe; cursor: pointer; transition: border-color .2s, background .2s; }
+.period-card.active { border-color: #92aecf; background: #f3f7fc; }
+.period-card.active::after { content: ''; position: absolute; top: 22px; right: 22px; width: 6px; height: 6px; border-radius: 50%; background: #6389b6; }
+.period-label { display: flex; align-items: center; gap: 8px; color: #7e8ea2; font-size: 12px; }
+.period-card strong { display: block; margin: 10px 0 7px; color: #2e4868; font-family: 'Segoe UI', sans-serif; font-weight: 600; font-size: 34px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.period-range { display: block; color: #97a4b4; font-size: 10px; }
+.chart-card { border-top: 1px solid #edf1f6; padding-top: 22px; }
+.chart-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.chart-title h3 { font-size: 14px; font-weight: 600; }
+.chart-title span { font-size: 11px; color: #91a0b1; }
+.fan-chart { width: 100%; height: 360px; }
+.analysis-state { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 280px; color: #91a0b1; font-size: 13px; }
+.analysis-state.error { flex-direction: column; }
+.spinner { width: 22px; height: 22px; border: 2px solid #e4ebf4; border-top-color: #6489b4; border-radius: 50%; animation: studio-spin .8s linear infinite; }
+@keyframes studio-spin { to { transform: rotate(360deg); } }
+@media (max-width: 980px) { .analysis-header { flex-wrap: wrap; } .header-actions { flex-wrap: wrap; } }
+@media (max-width: 600px) { .analysis-header h2 { font-size: 17px; } .period-cards { gap: 10px; margin-bottom: 20px; } .period-card { padding: 16px 12px; } .period-card strong { font-size: 28px; } .period-range { line-height: 1.8; } .period-label { gap: 5px; font-size: 11px; } .period-card.active::after { display: none; } .fan-chart { height: 290px; } .header-actions { gap: 8px; } }

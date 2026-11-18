@@ -1,0 +1,14 @@
+server:
+  port: 8097
+spring:
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 150MB
+logging:
+  level:
+    wcg.yhm.ymm.search.biz.mapper: debug
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml #xml文件位置

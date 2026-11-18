@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: ymm-user-relation-biz
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        enabled: true # 启用服务发现
+        group: "${NACOS_GROUP:DEFAULT_GROUP}"
+        namespace: "${NACOS_NAMESPACE:}"
+        server-addr: "${NACOS_SERVER_ADDR:localhost:8848}"
+      config:
+        server-addr: "${NACOS_SERVER_ADDR:localhost:8848}"
+        prefix: ${spring.application.name} # 配置 Data Id 前缀，这里使用应用名称作为前缀
+        group: "${NACOS_GROUP:DEFAULT_GROUP}"
+        namespace: "${NACOS_NAMESPACE:}"
+        file-extension: yaml # 配置文件格式
+        refresh-enabled: true # 是否开启动态刷新

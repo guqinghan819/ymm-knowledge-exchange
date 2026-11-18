@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>wcg.yhm</groupId>
+        <artifactId>ymm-knowledge-exchange-framework</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>wcg.yhm.framework.jackson</groupId>
+    <artifactId>ymm-spring-boot-stater-jackson</artifactId>
+    <packaging>jar</packaging>
+    <name>ymm-spring-boot-stater-jackson</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
+<!--        因为引入了commmon依赖，并且common中已经引入jackson所需依赖这里就不用引入了-->
+
+        <dependency>
+            <groupId>wcg.yhm.framework.common</groupId>
+            <artifactId>ymm-knowledge-exchange-common</artifactId>
+        </dependency>
+    </dependencies>
+</project>

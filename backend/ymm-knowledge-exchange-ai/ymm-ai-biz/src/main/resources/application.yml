@@ -1,0 +1,67 @@
+server:
+  port: 8099
+
+spring:
+  profiles:
+    active: dev
+  cloud:
+    loadbalancer:
+      eager-load:
+        clients:
+          - ymm-note-biz
+          - ymm-oss-biz
+  servlet:
+    multipart:
+      max-file-size: 150MB
+
+langchain4j:
+  dashscope:
+    api-key: "${DASHSCOPE_API_KEY:}"
+    base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
+    # Stable models verified against Alibaba Cloud documentation on 2026-11-03.
+    chat-model-name: ${DASHSCOPE_CHAT_MODEL:qwen3.8-max}
+    vision-model-name: ${DASHSCOPE_VISION_MODEL:qwen3-vl-plus}
+    moderation-text-model-name: ${DASHSCOPE_MODERATION_TEXT_MODEL:qwen3.8-flash}
+    moderation-vision-model-name: ${DASHSCOPE_MODERATION_VISION_MODEL:qwen3-vl-plus}
+    structured-model-name: ${DASHSCOPE_STRUCTURED_MODEL:qwen3.8-flash}
+    image-model-name: ${DASHSCOPE_IMAGE_MODEL:qwen-image-3.0}
+    publish-image-model-name: ${DASHSCOPE_PUBLISH_IMAGE_MODEL:qwen-image-3.0}
+    publish-image-fallback-model-name: ${DASHSCOPE_PUBLISH_IMAGE_FALLBACK_MODEL:qwen-image-3.0-pro}
+    embedding-model-name: text-embedding-v4
+    embedding-dimension: 1024
+
+rag:
+  note:
+    vector:
+      qdrant:
+        host: "${QDRANT_HOST:localhost}"
+        port: 6334
+        collection-name: note_rag_child_chunk
+        dense-vector-name: dense
+        sparse-vector-name: sparse
+        use-tls: false
+        api-key: "${QDRANT_API_KEY:}"
+        timeout-seconds: 10
+    retrieve:
+      hybrid-enabled: true
+      dense-top-k: 20
+      sparse-top-k: 30
+      rrf-k: 60
+      candidate-limit: 40
+      max-child-per-note: 3
+    rerank:
+      enabled: true
+      endpoint: https://dashscope.aliyuncs.com/compatible-api/v1/reranks
+      api-key: "${DASHSCOPE_API_KEY:}"
+      model: qwen3-rerank
+      top-n: 12
+      connect-timeout-ms: 1500
+      read-timeout-ms: 3000
+    evidence:
+      candidate-count: 8
+    context:
+      max-parent-count: 4
+      max-parent-per-note: 2
+      max-chars: 6000
+
+

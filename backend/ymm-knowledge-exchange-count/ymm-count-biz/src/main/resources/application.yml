@@ -1,0 +1,12 @@
+server:
+  port: 8094
+spring:
+  profiles:
+    active: dev
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml #xml文件位置
+
+logging:
+  level:
+    wcg.yhm.ymm.count.mapper: debug

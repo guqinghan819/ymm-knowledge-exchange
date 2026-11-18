@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f9fc">
+  <meta name="description" content="与雨绵绵一起，让真实经验被记录、讨论和继续使用。联系 Guqinghan，聊聊知识共创与业务合作。">
+  <title>业务合作 · 雨绵绵</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --navy: #102a54;
+      --navy-deep: #102a54;
+      --blue: #2d5db1;
+      --blue-light: #e9f1fb;
+      --paper: #f7f9fc;
+      --white: #fff;
+      --ink: #17243b;
+      --muted: #637086;
+      --line: #dce4ef;
+      font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      font-synthesis: none;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    a:focus-visible, button:focus-visible { outline: 3px solid rgba(45,93,177,.45); outline-offset: 4px; }
+    .wrap { width: min(1180px, calc(100% - 64px)); margin-inline: auto; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247,249,252,.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+      color: var(--navy);
+    }
+    .header-inner { min-height: 86px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 17px; white-space: nowrap; }
+    .brand img { display: block; width: 130px; height: auto; }
+    .brand span { border-left: 1px solid #cbd5e4; padding-left: 17px; color: #31415c; font-family: "Songti SC", "SimSun", serif; font-size: 15px; font-weight: 700; }
+    .header-nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 42px); font-size: 14px; color: #586b82; }
+    .header-nav a:hover { color: var(--blue); }
+    .header-nav .nav-contact { padding: 10px 17px; border: 1px solid var(--navy); border-radius: 9px; color: var(--navy); font-weight: 650; }
+    .header-nav .nav-contact:hover { background: var(--navy); color: white; }
+
+    .hero {
+      overflow: hidden;
+      background: var(--paper);
+      color: var(--navy);
+      position: relative;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 80% 40%, rgba(45,93,177,.09), transparent 34%), linear-gradient(rgba(45,93,177,.035) 1px, transparent 1px);
+      background-size: auto, 100% 38px;
+    }
+    .hero-inner { position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(330px, .95fr); align-items: center; gap: 7%; min-height: 610px; padding-block: 74px 92px; }
+    .hero-copy { max-width: 660px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 28px; color: var(--blue); font-size: 14px; font-weight: 700; letter-spacing: .04em; }
+    .eyebrow::before { content: ""; width: 25px; height: 2px; background: var(--blue); }
+    h1 { margin: 0; font-family: "Songti SC", "SimSun", serif; font-size: clamp(45px, 5.3vw, 76px); line-height: 1.22; letter-spacing: -.045em; font-weight: 700; }
+    h1 span { color: var(--blue); }
+    .hero-lead { max-width: 540px; margin: 28px 0 0; color: var(--muted); font-size: clamp(17px, 1.6vw, 20px); line-height: 1.9; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 24px; border-radius: 8px; font-size: 15px; font-weight: 650; transition: background .2s, transform .2s; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--navy); color: white; box-shadow: 0 14px 34px rgba(16,42,84,.18); }
+    .button-primary:hover { background: var(--blue); }
+    .button-secondary { color: var(--navy); border: 1px solid #a8b9ce; }
+    .button-secondary:hover { background: #eaf1fa; border-color: var(--blue); }
+    .hero-note { margin: 22px 0 0; color: #8290a4; font-size: 13px; }
+
+    .knowledge-map { position: relative; min-height: 430px; isolation: isolate; }
+    .knowledge-map::before { content: ""; position: absolute; inset: 12% 5%; border: 1px solid #cfdded; border-radius: 50%; transform: rotate(-18deg); }
+    .knowledge-map::after { content: ""; position: absolute; width: 250px; height: 250px; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(45,93,177,.15); filter: blur(35px); z-index: -1; }
+    .map-line { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; color: #6d99ce; }
+    .map-line path { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-dasharray: 4 7; opacity: .8; }
+    .map-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; width: 162px; height: 162px; border-radius: 50%; background: var(--blue); border: 10px solid #c3d6ed; box-shadow: 0 0 0 14px rgba(45,93,177,.08), 0 22px 55px rgba(25,52,93,.23); color: white; text-align: center; }
+    .map-center::after { content: ""; position: absolute; inset: -23px; border: 1px solid rgba(45,93,177,.35); border-radius: 50%; pointer-events: none; }
+    .map-center strong { font-size: 29px; letter-spacing: -.06em; }
+    .map-center small { display: block; margin-top: 4px; color: #dbe9fb; font-size: 12px; letter-spacing: .06em; }
+    .map-card { position: absolute; z-index: 1; width: 145px; min-height: 92px; padding: 16px 18px; background: #fff; border: 1px solid #d8e4f1; border-radius: 12px; box-shadow: 0 16px 35px rgba(25,52,93,.14); color: var(--navy); }
+    .map-card::before { content: ""; display: block; width: 20px; height: 3px; margin-bottom: 10px; border-radius: 8px; background: var(--blue); }
+    .map-card strong { display: block; font-size: 18px; }
+    .map-card small { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; }
+    .map-card.one { top: 2%; left: 7%; --rotation: -5deg; transform: rotate(var(--rotation)); }
+    .map-card.two { top: 7%; right: 3%; --rotation: 5deg; transform: rotate(var(--rotation)); }
+    .map-card.three { bottom: 5%; right: 5%; --rotation: -4deg; transform: rotate(var(--rotation)); }
+    .map-card.four { bottom: 1%; left: 2%; --rotation: 4deg; transform: rotate(var(--rotation)); }
+
+    main { overflow: hidden; }
+    .intro { display: grid; grid-template-columns: .8fr 1.2fr; gap: 8%; align-items: start; padding-block: 112px 100px; border-bottom: 1px solid var(--line); }
+    .section-index { display: block; color: var(--blue); font-size: 14px; font-weight: 700; margin-bottom: 21px; }
+    h2 { margin: 0; color: var(--navy); font-family: "Songti SC", "SimSun", serif; font-size: clamp(32px, 3.3vw, 48px); line-height: 1.32; letter-spacing: -.04em; }
+    .intro-text { padding-top: 31px; color: #41556f; font-size: 19px; line-height: 2; }
+    .intro-text p { margin: 0 0 18px; }
+    .intro-text p:last-child { margin-bottom: 0; }
+    .intro-text strong { color: var(--navy); }
+
+    .directions { padding-block: 105px 120px; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 36px; }
+    .section-heading p { max-width: 400px; margin: 0 0 5px; color: var(--muted); line-height: 1.8; }
+    .direction-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .direction { position: relative; display: flex; flex-direction: column; min-height: 330px; padding: 31px; background: var(--white); border: 1px solid var(--line); border-radius: 14px; transition: border-color .24s ease, box-shadow .24s ease, transform .24s ease; }
+    .direction:hover { transform: translateY(-5px); border-color: #a9c3e4; box-shadow: 0 22px 48px rgba(25,52,93,.1); }
+    .direction:nth-child(2) { background: #eaf1f9; border-color: #d5e3f2; }
+    .direction-icon { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 13px; background: #e9f1fa; color: var(--blue); }
+    .direction:nth-child(2) .direction-icon { background: #d5e6f6; }
+    .direction-icon svg { width: 25px; height: 25px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .direction h3 { margin: 34px 0 12px; color: var(--navy); font-size: 24px; letter-spacing: -.03em; }
+    .direction p { margin: 0; color: #5b6d83; line-height: 1.85; font-size: 15px; }
+    .direction-foot { margin-top: auto; padding-top: 26px; color: var(--blue); font-size: 13px; font-weight: 650; }
+
+    .path-section { background: #edf3fa; padding-block: 92px 103px; }
+    .path-inner { display: grid; grid-template-columns: .75fr 1.25fr; gap: 10%; align-items: start; }
+    .path-copy p { max-width: 340px; margin: 22px 0 0; color: var(--muted); line-height: 1.9; }
+    .steps { padding: 0; margin: 4px 0 0; list-style: none; border-top: 1px solid #cbd9e7; }
+    .steps li { display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 24px 0; border-bottom: 1px solid #cbd9e7; }
+    .step-no { color: var(--blue); font-family: Georgia, serif; font-size: 21px; }
+    .steps strong { font-size: 18px; }
+    .steps p { margin: 7px 0 0; color: var(--muted); line-height: 1.7; font-size: 14px; }
+
+    .contact-section { padding-block: 116px 120px; }
+    .contact-panel { display: grid; grid-template-columns: 1fr .9fr; gap: 8%; padding: clamp(30px, 6vw, 72px); border-radius: 18px; background: var(--navy); color: #fff; }
+    .contact-panel .section-index { color: #9cc4f4; }
+    .contact-panel h2 { max-width: 500px; color: white; }
+    .contact-panel p { max-width: 460px; margin: 21px 0 0; color: #bdcde0; line-height: 1.9; }
+    .contact-list { align-self: center; border-top: 1px solid rgba(255,255,255,.2); }
+    .contact-row { display: grid; grid-template-columns: 55px 1fr auto; align-items: center; gap: 18px; min-height: 104px; border-bottom: 1px solid rgba(255,255,255,.2); }
+    .contact-row .channel { color: #a6bcd4; font-size: 14px; }
+    .contact-row .value { overflow-wrap: anywhere; font-size: clamp(16px, 1.75vw, 21px); font-weight: 600; }
+    .contact-row a.value:hover { color: #bed9fa; }
+    .copy-button { padding: 9px 14px; border: 1px solid rgba(255,255,255,.36); border-radius: 7px; background: transparent; color: #fff; cursor: pointer; font-size: 13px; white-space: nowrap; }
+    .copy-button:hover { background: rgba(255,255,255,.12); }
+    .contact-hint { margin: 15px 0 0 !important; color: #a6bcd4 !important; font-size: 13px; }
+
+    .site-footer { padding: 29px 0; background: var(--navy-deep); color: #a8b9ce; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; font-size: 13px; }
+    .footer-inner strong { color: #e0eaf5; font-size: 15px; }
+    .footer-inner a:hover { color: #fff; }
+    #copy-status { position: fixed; z-index: 5; left: 50%; bottom: 25px; transform: translateX(-50%); padding: 11px 17px; border-radius: 8px; background: #203c5f; color: white; box-shadow: 0 8px 22px rgba(0,0,0,.18); font-size: 14px; }
+    #copy-status[hidden] { display: none; }
+    #directions, #path, #contact { scroll-margin-top: 86px; }
+
+    .motion-enabled .hero-copy > * { animation: hero-in .78s cubic-bezier(.16,1,.3,1) both; }
+    .motion-enabled .hero-copy > :nth-child(2) { animation-delay: .08s; }
+    .motion-enabled .hero-copy > :nth-child(3) { animation-delay: .16s; }
+    .motion-enabled .hero-copy > :nth-child(4) { animation-delay: .24s; }
+    .motion-enabled .hero-copy > :nth-child(5) { animation-delay: .32s; }
+    .motion-enabled .map-line path { animation: line-flow 13s linear infinite; }
+    .motion-enabled .map-center { animation: center-in .85s .3s cubic-bezier(.16,1,.3,1) both; }
+    .motion-enabled .map-center::after { animation: ring-pulse 3.5s 1.2s ease-out infinite; }
+    .motion-enabled .map-card { animation: card-in .75s cubic-bezier(.16,1,.3,1) both; }
+    .motion-enabled .map-card.one { animation-delay: .4s; }
+    .motion-enabled .map-card.two { animation-delay: .55s; }
+    .motion-enabled .map-card.three { animation-delay: .7s; }
+    .motion-enabled .map-card.four { animation-delay: .85s; }
+    .motion-enabled [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .8s cubic-bezier(.16,1,.3,1), border-color .24s, box-shadow .24s; }
+    .motion-enabled [data-reveal].is-visible { opacity: 1; transform: none; }
+    .motion-enabled .direction:nth-child(2) { transition-delay: .08s; }
+    .motion-enabled .direction:nth-child(3) { transition-delay: .16s; }
+    .motion-enabled .direction.is-visible:hover { transform: translateY(-5px); }
+    @keyframes hero-in { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+    @keyframes center-in { from { opacity: 0; transform: translate(-50%,-50%) scale(.72); } to { opacity: 1; transform: translate(-50%,-50%) scale(1); } }
+    @keyframes card-in { from { opacity: 0; transform: translateY(18px) rotate(var(--rotation)); } to { opacity: 1; transform: translateY(0) rotate(var(--rotation)); } }
+    @keyframes line-flow { to { stroke-dashoffset: -110; } }
+    @keyframes ring-pulse { 0% { opacity: .7; transform: scale(.95); } 70%, 100% { opacity: 0; transform: scale(1.18); } }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; padding-block: 68px 74px; gap: 54px; }
+      .knowledge-map { width: min(510px, 100%); margin-inline: auto; }
+      .intro, .path-inner { grid-template-columns: 1fr; gap: 28px; }
+      .intro-text { padding-top: 0; }
+      .direction-grid { grid-template-columns: 1fr; }
+      .direction { min-height: 0; }
+      .direction-foot { margin-top: 12px; }
+      .contact-panel { grid-template-columns: 1fr; gap: 35px; }
+    }
+    @media (max-width: 600px) {
+      .wrap { width: min(100% - 36px, 1180px); }
+      .header-inner { min-height: 68px; }
+      .brand img { width: 112px; }
+      .brand span { display: none; }
+      .header-nav { gap: 14px; }
+      .header-nav a:not(.nav-contact) { display: none; }
+      .header-nav .nav-contact { padding: 8px 12px; }
+      .hero-inner { padding-block: 58px 50px; gap: 28px; }
+      h1 { font-size: clamp(39px, 10vw, 56px); }
+      .hero-lead { margin-top: 22px; font-size: 16px; }
+      .hero-actions { margin-top: 28px; }
+      .knowledge-map { min-height: 320px; transform: scale(.88); transform-origin: center; }
+      .map-center { width: 128px; height: 128px; border-width: 8px; }
+      .map-center strong { font-size: 24px; }
+      .map-card { width: 117px; min-height: 77px; padding: 11px 12px; }
+      .map-card strong { font-size: 15px; }
+      .map-card small { font-size: 11px; }
+      .intro { padding-block: 70px; }
+      .intro-text { font-size: 16px; }
+      .directions { padding-block: 70px 78px; }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 16px; }
+      .direction { padding: 25px; }
+      .path-section { padding-block: 70px; }
+      .steps li { gap: 10px; }
+      .contact-section { padding-block: 72px; }
+      .contact-panel { padding: 28px 22px; }
+      .contact-row { grid-template-columns: 42px 1fr; gap: 8px 12px; padding-block: 19px; }
+      .contact-row .copy-button { grid-column: 2; justify-self: start; }
+      .footer-inner { align-items: start; flex-direction: column; gap: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .button, .direction { transition: none; }
+      .button:hover, .direction:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="返回雨绵绵首页"><img src="/brand-logo.png" alt="雨绵绵"><span>知识交流社区</span></a>
+      <nav class="header-nav" aria-label="页面导航">
+        <a href="#directions">合作方向</a>
+        <a href="#path">如何开始</a>
+        <a class="nav-contact" href="#contact">联系合作</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">雨绵绵 · 业务合作</p>
+          <h1 id="hero-title">好知识，<br>值得<span>一起生长。</span></h1>
+          <p class="hero-lead">一篇笔记可以回答一个人的问题，一次交流也可能打开新的思路。我们想和同样相信知识分享的人，把这些小小的连接做得更长久。</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contact">聊聊合作想法</a>
+            <a class="button button-secondary" href="#directions">看看合作方向</a>
+          </div>
+          <p class="hero-note">由 Guqinghan 发起 · 欢迎带着具体想法来聊</p>
+        </div>
+        <div class="knowledge-map" role="img" aria-label="知识从记录开始，经过交流和检索，成为新的创作">
+          <svg class="map-line" viewBox="0 0 500 430" preserveAspectRatio="none" aria-hidden="true"><path d="M130 78 C172 85 174 127 228 182 M370 82 C327 105 320 131 273 183 M365 345 C319 319 321 293 273 244 M124 347 C172 321 175 289 225 246"/></svg>
+          <div class="map-center"><div><strong>雨绵绵</strong><small>让知识流动</small></div></div>
+          <div class="map-card one"><strong>记录</strong><small>分享真实经验</small></div>
+          <div class="map-card two"><strong>交流</strong><small>碰撞不同见解</small></div>
+          <div class="map-card three"><strong>检索</strong><small>找到需要的答案</small></div>
+          <div class="map-card four"><strong>再创造</strong><small>让灵感继续生长</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro wrap" aria-labelledby="intro-title" data-reveal>
+      <div>
+        <span class="section-index">我们相信</span>
+        <h2 id="intro-title">一次分享，<br>不该止步于发布。</h2>
+      </div>
+      <div class="intro-text">
+        <p>雨绵绵是一个<strong>知识交流社区</strong>。人们在这里发布笔记、讨论经验，也能通过基于平台笔记的知识库问答，重新发现已有的内容。</p>
+        <p>我们期待的合作，是让有价值的经验更容易被看见，让认真提出的问题遇见更好的回答，让知识在分享之后继续发挥作用。</p>
+      </div>
+    </section>
+
+    <section class="directions wrap" id="directions" aria-labelledby="directions-title">
+      <div class="section-heading" data-reveal>
+        <div><span class="section-index">可以一起做什么</span><h2 id="directions-title">从一个好想法开始。</h2></div>
+        <p>方向可以讨论，形式可以共创。只要能帮助真实的知识分享，我们都愿意认真听听。</p>
+      </div>
+      <div class="direction-grid">
+        <article class="direction" data-reveal>
+          <div class="direction-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20M8 8h8M8 12h6"/></svg></div>
+          <h3>内容共创</h3>
+          <p>把专业经验、实践心得或值得讨论的话题，变成读者愿意收藏、提问和继续分享的内容。</p>
+          <div class="direction-foot">适合创作者、专业人士与内容团队</div>
+        </article>
+        <article class="direction" data-reveal>
+          <div class="direction-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.5"/><circle cx="17" cy="8" r="2.5"/><path d="M2.5 19v-2a4.5 4.5 0 0 1 9 0v2H2.5ZM12.5 19v-2a4.5 4.5 0 0 1 9 0v2h-9Z"/></svg></div>
+          <h3>社区交流</h3>
+          <p>围绕一个有价值的问题，邀请更多人分享各自的做法，让不同经验在讨论中相遇。</p>
+          <div class="direction-foot">适合社群、校园组织与知识型机构</div>
+        </article>
+        <article class="direction" data-reveal>
+          <div class="direction-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="m9 12 2 2 4-4M12 1v3M12 20v3M1 12h3M20 12h3"/></svg></div>
+          <h3>产品共建</h3>
+          <p>如果你有能改善知识发现、内容检索或创作体验的资源与建议，我们可以一起探索连接点。</p>
+          <div class="direction-foot">适合产品、技术与服务伙伴</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="path-section" id="path" aria-labelledby="path-title">
+      <div class="wrap path-inner">
+        <div class="path-copy" data-reveal><span class="section-index">如何开始</span><h2 id="path-title">先聊清楚，<br>再一起往前走。</h2><p>不必准备一份完美的方案。说说你是谁、想做什么，以及它能为知识分享带来什么，就已经是很好的开始。</p></div>
+        <ol class="steps" data-reveal>
+          <li><span class="step-no">01</span><div><strong>说说你的想法</strong><p>通过 QQ 或邮件联系，简单介绍合作方向与相关背景。</p></div></li>
+          <li><span class="step-no">02</span><div><strong>找到共同点</strong><p>围绕内容价值、适合的人群和可行的形式继续讨论。</p></div></li>
+          <li><span class="step-no">03</span><div><strong>把想法做出来</strong><p>从一个明确的小目标出发，让合作有实际内容，也有继续成长的空间。</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="contact-section wrap" id="contact" aria-labelledby="contact-title">
+      <div class="contact-panel" data-reveal>
+        <div><span class="section-index">联系合作</span><h2 id="contact-title">你的想法，<br>也许正是下一次连接。</h2><p>我是 Guqinghan。欢迎告诉我你的合作设想，或者先从一个值得讨论的问题聊起。</p></div>
+        <div>
+          <div class="contact-list">
+            <div class="contact-row"><span class="channel">QQ</span><span class="value">0000000000</span><button class="copy-button" type="button" data-copy="0000000000" data-label="QQ">复制号码</button></div>
+            <div class="contact-row"><span class="channel">邮箱</span><a class="value" href="mailto:contact@example.com?subject=%E9%9B%A8%E7%BB%B5%E7%BB%B5%E5%90%88%E4%BD%9C%E6%B2%9F%E9%80%9A">contact@example.com</a><button class="copy-button" type="button" data-copy="contact@example.com" data-label="邮箱">复制邮箱</button></div>
+          </div>
+          <p class="contact-hint">邮件中写上“合作方向 + 简单介绍”，方便我们从具体的事情聊起。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="wrap footer-inner"><strong>雨绵绵 · 让知识在分享中生长</strong><span>由 Guqinghan 发起</span><a href="/">返回首页</a></div></footer>
+  <div id="copy-status" role="status" aria-live="polite" hidden></div>
+  <script>
+    const status = document.getElementById('copy-status')
+    let statusTimer
+    function showStatus(message) {
+      status.textContent = message
+      status.hidden = false
+      clearTimeout(statusTimer)
+      statusTimer = setTimeout(() => { status.hidden = true }, 2500)
+    }
+    document.querySelectorAll('[data-copy]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(button.dataset.copy)
+          showStatus(button.dataset.label + '已复制')
+          const oldLabel = button.textContent
+          button.textContent = '已复制'
+          setTimeout(() => { button.textContent = oldLabel }, 2200)
+        } catch {
+          showStatus('复制未成功，请长按上方信息手动复制')
+        }
+      })
+    })
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+      document.documentElement.classList.add('motion-enabled')
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      }, { threshold: .12, rootMargin: '0px 0px -35px 0px' })
+      document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element))
+    }
+  </script>
+</body>
+</html>

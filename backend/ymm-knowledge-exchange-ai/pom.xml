@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>wcg.yhm</groupId>
+        <artifactId>ymm-knowledge-exchange-backend</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>ymm-knowledge-exchange-ai</artifactId>
+    <packaging>pom</packaging>
+    <description>ai服务</description>
+    <modules>
+        <module>ymm-ai-api</module>
+        <module>ymm-ai-biz</module>
+    </modules>
+    <name>ymm-knowledge-exchange-ai</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+</project>

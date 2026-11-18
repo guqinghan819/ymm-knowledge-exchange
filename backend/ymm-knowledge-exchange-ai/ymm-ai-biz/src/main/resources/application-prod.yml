@@ -1,0 +1,6 @@
+tavily:
+  api:
+    url: https://api.tavily.com/search
+    key: "${TAVILY_API_KEY:}"
+  search:
+    max-results: 5

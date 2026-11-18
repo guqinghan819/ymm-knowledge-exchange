@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: ymm-text-biz
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        namespace: "${NACOS_NAMESPACE:}"
+        server-addr: "${NACOS_SERVER_ADDR:localhost:8848}"
+        enabled: true
+        group: "${NACOS_GROUP:DEFAULT_GROUP}"

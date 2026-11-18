@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wcg.yhm.ymm.count.mapper.NoteCountMapper">
+
+    <insert id="saveOrUpdateNoteLikeBatch">
+        INSERT INTO note_count (note_id, like_total)
+        VALUES
+        <foreach collection="noteCounts" item="item" separator=",">
+            (#{item.noteId}, #{item.likeTotal})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        like_total = like_total + VALUES(like_total)
+    </insert>
+
+    <insert id="saveOrUpdateNoteCollectBatch">
+        INSERT INTO note_count (note_id, collect_total)
+        VALUES
+        <foreach collection="noteCounts" item="item" separator=",">
+            (#{item.noteId}, #{item.collectTotal})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        collect_total = collect_total + VALUES(collect_total)
+    </insert>
+
+    <insert id="insertOrUpdateCommentTotalByNoteId" parameterType="map">
+        INSERT INTO note_count (note_id, comment_total)
+        VALUES (#{noteId}, #{count})
+            ON DUPLICATE KEY UPDATE comment_total = comment_total + (#{count});
+    </insert>
+
+</mapper>

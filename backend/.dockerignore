@@ -1,0 +1,13 @@
+.git
+.gitignore
+.idea
+.vscode
+.claude
+.m2repo
+logs
+output
+**/logs
+**/target
+**/*.log
+.env
+.DS_Store

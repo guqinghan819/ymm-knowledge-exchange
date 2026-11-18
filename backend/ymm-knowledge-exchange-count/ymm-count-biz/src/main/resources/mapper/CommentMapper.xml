@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wcg.yhm.ymm.count.mapper.CommentMapper">
+
+
+    <update id="updateChildCommentTotal" parameterType="map">
+        update comment
+        set child_comment_total = child_comment_total + #{count}, update_time = now()
+        where id = #{parentId} and level = 1
+    </update>
+
+    <update id="batchUpdateCommentLikeTotal" parameterType="map">
+        update comment
+        set like_total = case id
+        <foreach collection="commentLikeCounts" item="item" separator="">
+            when #{item.commentId} then GREATEST(0, like_total + #{item.count})
+        </foreach>
+        else like_total end,
+        update_time = now()
+        where id in
+        <foreach collection="commentLikeCounts" item="item" open="(" close=")" separator=",">
+            #{item.commentId}
+        </foreach>
+    </update>
+
+</mapper>

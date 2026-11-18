@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wcg.yhm.comment.biz.mapper.CommentLikeMapper">
+
+    <insert id="batchInsertOrUpdate" parameterType="list">
+        INSERT INTO comment_like (user_id, comment_id, status, create_time)
+        VALUES
+        <foreach item="item" collection="commentLikes" separator=",">
+            (#{item.userId}, #{item.commentId}, #{item.status}, #{item.createTime})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+            status = VALUES(status),
+            create_time = VALUES(create_time)
+    </insert>
+
+</mapper>

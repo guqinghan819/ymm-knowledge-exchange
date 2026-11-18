@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wcg.yhm.ymm.count.mapper.UserCountMapper">
+
+    <insert id="saveOrUpdateFansBatch">
+        INSERT INTO user_count (user_id, fans_total)
+        VALUES
+        <foreach collection="userCounts" item="item" separator=",">
+            (#{item.userId}, #{item.fansTotal})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        fans_total = fans_total + VALUES(fans_total)
+    </insert>
+
+    <insert id="saveOrUpdateFollowing" >
+        INSERT INTO user_count (user_id, following_total)
+        VALUE(#{userId}, #{count})
+        ON DUPLICATE KEY UPDATE
+        following_total = following_total + (#{count})
+    </insert>
+
+    <insert id="saveOrUpdateLikeTotalBatch">
+        INSERT INTO user_count(user_id, like_total)
+        VALUES
+        <foreach collection="userCounts" item="item" separator=",">
+            (#{item.userId}, #{item.likeTotal})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        like_total = like_total + VALUES(like_total)
+    </insert>
+
+    <insert id="saveOrUpdateNoteCollectBatch">
+        INSERT INTO user_count(user_id, collect_total)
+        VALUES
+        <foreach collection="userCounts" item="item" separator=",">
+            (#{item.userId}, #{item.collectTotal})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        collect_total = collect_total + VALUES(collect_total)
+    </insert>
+
+
+    <insert id="saveOrUpdatePublishTotal">
+        INSERT INTO user_count(user_id, note_total)
+        VALUE (#{userId}, GREATEST(0, #{count}))
+        ON DUPLICATE KEY UPDATE
+        note_total = GREATEST(0, note_total + (#{count}))
+    </insert>
+</mapper>

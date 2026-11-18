@@ -1,0 +1,39 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+application-local.yml
+application-local.yaml
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+.npmrc
+settings.xml
+# Dependencies, outputs, logs and editor state
+node_modules/
+target/
+dist/
+build/
+logs/
+output/
+.m2repo/
+.codex-build/
+.idea/
+.vscode/
+.claude/
+.codex/
+.agents/
+.aws/
+draft_*/
+__pycache__/
+*.log
+*.dump
+*.bak
+*.zip
+*.pptx
+# Generated frontend declarations
+auto-imports.d.ts
+components.d.ts

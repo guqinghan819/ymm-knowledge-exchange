@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wcg.yhm.note.domain.mapper.NoteMapper">
+    <select id="selectByCursor" resultType="wcg.yhm.note.domain.dataobject.Note">
+        SELECT id, creator_id FROM note
+        <where>
+            <if test="cursor != null">
+                AND id > #{cursor}
+            </if>
+            <if test="topicIds != null and topicIds.size() > 0">
+                AND topic_id IN
+                <foreach collection="topicIds" item="topicId" open="(" separator="," close=")">
+                    #{topicId}
+                </foreach>
+            </if>
+            <if test="loginUserId != null">
+                AND creator_id = #{loginUserId}
+            </if>
+            <if test="loginUserId == null">
+                AND visible = 0
+            </if>
+                AND status = 1
+        </where>
+        ORDER BY id asc
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectMyNotes" resultType="wcg.yhm.note.domain.dataobject.Note">
+        SELECT id, title, img_uris, video_uri, create_time, is_top, type, status, review_reason
+        FROM note
+        WHERE creator_id = #{creatorId}
+        AND is_top = 0
+        AND status != 2
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        <if test="cursor != null">
+            AND id &lt; #{cursor}
+        </if>
+        ORDER BY id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectPinnedNotes" resultType="wcg.yhm.note.domain.dataobject.Note">
+        SELECT id, title, img_uris, video_uri, create_time, is_top, type, status, review_reason
+        FROM note
+        WHERE creator_id = #{creatorId}
+        AND is_top = 1
+        AND status != 2
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        ORDER BY id DESC
+    </select>
+
+    <select id="selectAdminNotes" resultType="wcg.yhm.note.domain.dataobject.Note">
+        SELECT id, title, img_uris, video_uri, create_time, update_time, is_top, type, status, visible,
+               creator_id, topic_id, topic_name, review_method, review_reason, reviewed_at, review_version
+        FROM note
+        <where>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="creatorId != null">
+                AND creator_id = #{creatorId}
+            </if>
+            <if test="cursor != null">
+                AND id &lt; #{cursor}
+            </if>
+        </where>
+        ORDER BY id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectAnalysisNotes" resultType="wcg.yhm.note.model.vo.NoteAnalysisNoteItemResponse">
+        SELECT n.id AS noteId,
+               n.title AS title,
+               CASE
+                   WHEN n.type = 0 AND n.img_uris IS NOT NULL AND n.img_uris != ''
+                       THEN SUBSTRING_INDEX(n.img_uris, ',', 1)
+                   WHEN n.type = 1 THEN n.video_uri
+                   ELSE NULL
+               END AS cover,
+               n.type AS type,
+               n.create_time AS createTime,
+               IFNULL(nc.like_total, 0) AS likeCount,
+               IFNULL(nc.collect_total, 0) AS collectCount,
+               IFNULL(nc.comment_total, 0) AS commentCount,
+               COALESCE(c.name, n.topic_name) AS channelName
+        FROM note n
+        LEFT JOIN note_count nc ON nc.note_id = n.id
+        LEFT JOIN (
+            SELECT topic_id, MIN(channel_id) AS channel_id
+            FROM channel_topic_rel
+            GROUP BY topic_id
+        ) tc ON tc.topic_id = n.topic_id
+        LEFT JOIN channel c ON c.id = tc.channel_id AND c.is_deleted = 0
+        WHERE n.creator_id = #{creatorId}
+          AND n.status = #{status}
+          AND n.create_time &gt;= #{startTime}
+          AND n.create_time &lt; #{endTime}
+        ORDER BY n.id DESC
+    </select>
+
+    <select id="selectTopPublishers" resultType="wcg.yhm.note.model.vo.AdminUserRankResponse">
+        SELECT creator_id AS userId,
+               COUNT(*) AS count
+        FROM note
+        WHERE create_time &gt;= #{startTime}
+          AND create_time &lt; #{endTime}
+          AND status != #{deletedStatus}
+        GROUP BY creator_id
+        ORDER BY count DESC, creator_id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectTopLikedNotes" resultType="wcg.yhm.note.model.vo.AdminLikedNoteResponse">
+        SELECT n.id AS noteId,
+               n.title AS title,
+               CASE
+                   WHEN n.type = 0 AND n.img_uris IS NOT NULL AND n.img_uris != ''
+                       THEN SUBSTRING_INDEX(n.img_uris, ',', 1)
+                   WHEN n.type = 1 THEN n.video_uri
+                   ELSE NULL
+               END AS cover,
+               n.type AS type,
+               n.creator_id AS creatorId,
+               nc.like_total AS likeCount
+        FROM note_count nc
+        INNER JOIN note n ON n.id = nc.note_id
+        WHERE n.status = #{normalStatus}
+          AND n.visible = #{publicVisible}
+          AND nc.like_total &gt; 0
+        ORDER BY nc.like_total DESC, n.create_time DESC, n.id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectAdminChannelWordCloud" resultType="wcg.yhm.note.model.vo.AdminChannelWordCloudResponse">
+        SELECT c.name AS name,
+               COUNT(DISTINCT n.id) AS count
+        FROM note n
+        INNER JOIN channel_topic_rel ctr ON ctr.topic_id = n.topic_id
+        INNER JOIN channel c ON c.id = ctr.channel_id AND c.is_deleted = 0
+        WHERE n.create_time &gt;= #{startTime}
+          AND n.create_time &lt; #{endTime}
+          AND n.status != #{deletedStatus}
+        GROUP BY c.id, c.name
+        ORDER BY count DESC, c.id ASC
+    </select>
+
+</mapper>

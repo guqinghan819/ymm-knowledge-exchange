@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: ymm-text-biz
+  cassandra:
+    port: 9042 # 端口
+    contact-points: "${CASSANDRA_CONTACT_POINTS:localhost}"
+    keyspace-name: ymm # 库名

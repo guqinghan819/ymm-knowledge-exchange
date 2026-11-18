@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wcg.yhm.comment.biz.mapper.CommentMapper">
+
+
+    <insert id="batchInsert" parameterType="list">
+        insert IGNORE into comment (id, note_id, user_id,
+        content_uuid, is_content_empty, image_url,
+        `level`, reply_total, like_total,
+        parent_id, reply_comment_id, reply_user_id,
+        is_top, create_time, update_time
+        )
+        values
+        <foreach collection="comments" item="comment" separator=",">
+            (#{comment.id}, #{comment.noteId}, #{comment.userId}, #{comment.contentUuid}, #{comment.isContentEmpty}
+            , #{comment.imageUrl}, #{comment.level}, #{comment.replyTotal}, #{comment.likeTotal}, #{comment.parentId}
+            , #{comment.replyCommentId}, #{comment.replyUserId}, #{comment.isTop}, #{comment.createTime}, #{comment.updateTime})
+        </foreach>
+    </insert>
+
+    <update id="batchUpdateHeatByCommentIds" parameterType="map">
+        UPDATE comment
+        SET heat = CASE id
+        <foreach collection="commentHeatBOS" item="bo" separator="">
+            WHEN #{bo.id} THEN #{bo.heat}
+        </foreach>
+        ELSE heat END
+        WHERE id IN
+        <foreach collection="commentIds" item="commentId" open="(" close=")" separator=",">
+            #{commentId}
+        </foreach>
+    </update>
+
+    <select id="selectOneLevelByCursor" resultType="wcg.yhm.comment.biz.domain.po.Comment">
+        SELECT id, note_id, user_id, content_uuid, is_content_empty, image_url,
+               `level`, reply_total, like_total, parent_id, reply_comment_id,
+               reply_user_id, is_top, create_time, update_time, child_comment_total,
+               first_reply_comment_id, heat
+        FROM comment
+        WHERE note_id = #{noteId}
+          AND `level` = 1
+          AND parent_id = #{noteId}
+        <if test="cursor != null and cursorHeat != null">
+          AND (heat &lt; #{cursorHeat} OR (heat = #{cursorHeat} AND id &gt; #{cursor}))
+        </if>
+        ORDER BY heat DESC, id ASC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectReplyByCursor" resultType="wcg.yhm.comment.biz.domain.po.Comment">
+        SELECT id, note_id, user_id, content_uuid, is_content_empty, image_url,
+               `level`, reply_total, like_total, parent_id, reply_comment_id,
+               reply_user_id, is_top, create_time, update_time, child_comment_total,
+               first_reply_comment_id, heat
+        FROM comment
+        WHERE note_id = #{noteId}
+          AND `level` = 2
+          AND parent_id = #{parentId}
+        <if test="cursor != null">
+          AND id &gt; #{cursor}
+        </if>
+        ORDER BY id ASC
+        LIMIT #{limit}
+    </select>
+
+</mapper>

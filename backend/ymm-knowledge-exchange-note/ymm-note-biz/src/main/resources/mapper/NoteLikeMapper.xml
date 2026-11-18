@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wcg.yhm.note.domain.mapper.NoteLikeMapper">
+
+    <insert id="insertOrUpdate" parameterType="wcg.yhm.note.domain.dataobject.NoteLike">
+        INSERT INTO `note_like` (user_id, note_id, create_time, status)
+        VALUES (#{userId}, #{noteId}, #{createTime}, #{status})
+        ON DUPLICATE KEY UPDATE
+        create_time = #{createTime}, status = #{status}
+    </insert>
+
+
+    <insert id="batchInsertOrUpdate" parameterType="list">
+        INSERT INTO note_like (user_id, note_id, status, create_time)
+        VALUES
+        <foreach item="item" collection="noteLikeList" separator=",">
+            (#{item.userId}, #{item.noteId}, #{item.status}, #{item.createTime})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        status = VALUES(status),
+        create_time = VALUES(create_time)
+    </insert>
+
+</mapper>

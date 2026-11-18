@@ -1,0 +1,18 @@
+elasticsearch:
+  address: "${ELASTICSEARCH_ADDRESS:localhost:9200}"
+  hotUpdateExtDict: "${ELASTICSEARCH_HOTUPDATEEXTDICT:./data/mydict_hot_update.dic}"
+
+canal:
+  address: "${CANAL_ADDRESS:localhost:11111}"
+  destination: example #数据目标
+  username: "${CANAL_USERNAME:}"
+  password: "${CANAL_PASSWORD:}"
+  subscribe: ymm_knowledge_exchange.note,ymm_knowledge_exchange.user #只订阅笔记表和用户表
+  batchSize: 1000 #一批次拉取数量
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "${DB_URL:jdbc:mysql://localhost:3306/ymm_knowledge_exchange?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai}"
+    password: "${DB_PASSWORD:}"
+    username: "${DB_USERNAME:root}"

@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: ymm-notification-biz
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        group: "${NACOS_GROUP:DEFAULT_GROUP}"
+        namespace: "${NACOS_NAMESPACE:}"
+        server-addr: "${NACOS_SERVER_ADDR:localhost:8848}"
+      config:
+        server-addr: "${NACOS_SERVER_ADDR:localhost:8848}"
+        prefix: ${spring.application.name}
+        group: "${NACOS_GROUP:DEFAULT_GROUP}"
+        namespace: "${NACOS_NAMESPACE:}"
+        file-extension: yaml
+        refresh-enabled: true

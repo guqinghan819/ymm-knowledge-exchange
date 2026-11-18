@@ -1,0 +1,8 @@
+CREATE TABLE comment_content (
+    note_id BIGINT, -- 笔记 ID，分区键
+    year_month TEXT, -- 发布年月
+    content_id UUID, -- 评论内容 ID
+    content TEXT,
+    PRIMARY KEY ((note_id, year_month), content_id)
+);
+

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+<rect width="1200" height="720" rx="28" fill="#f3f6fc"/>
+<rect x="50" y="50" width="1100" height="620" rx="22" fill="white" stroke="#dce4f2"/>
+<rect x="50" y="50" width="220" height="620" rx="22" fill="#e8eefb"/>
+<text x="90" y="115" font-family="sans-serif" font-size="26" fill="#284c86">KNOWLEDGE</text>
+<rect x="90" y="160" width="140" height="16" rx="8" fill="#b9cae9"/>
+<rect x="90" y="210" width="110" height="16" rx="8" fill="#cbd8ed"/>
+<rect x="90" y="260" width="125" height="16" rx="8" fill="#cbd8ed"/>
+<text x="320" y="120" font-family="sans-serif" font-size="28" fill="#284c86">Share ideas. Build knowledge.</text>
+<rect x="320" y="165" width="340" height="250" rx="16" fill="#e8eefb"/>
+<rect x="700" y="165" width="400" height="32" rx="8" fill="#dce5f5"/>
+<rect x="700" y="225" width="350" height="18" rx="8" fill="#edf1f8"/>
+<rect x="700" y="265" width="380" height="18" rx="8" fill="#edf1f8"/>
+<rect x="700" y="305" width="320" height="18" rx="8" fill="#edf1f8"/>
+<rect x="320" y="455" width="780" height="120" rx="16" fill="#f1f5fc"/>
+<text x="320" y="625" font-family="sans-serif" font-size="18" fill="#7485a0">Illustration · No account or conversation data</text>
+</svg>

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: ymm-ai-biz
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        enabled: true # 启用服务发现
+        group: "${NACOS_GROUP:DEFAULT_GROUP}"
+        namespace: "${NACOS_NAMESPACE:}"
+        server-addr: "${NACOS_SERVER_ADDR:localhost:8848}"

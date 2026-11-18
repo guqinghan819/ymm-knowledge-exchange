@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ymm-primary: #2859a6;
+  --ymm-primary-strong: #1f4788;
+  --ymm-primary-soft: #eaf1fb;
+  --ymm-ink: #17233b;
+  --ymm-text: #354158;
+  --ymm-muted: #7b879b;
+  --ymm-line: #dce4f0;
+  --ymm-line-soft: #e9eef5;
+  --ymm-paper: #ffffff;
+  --ymm-canvas: #f4f7fb;
+  --ymm-danger: #d94f5c;
+  --ymm-success: #2f8164;
+  --ymm-radius-sm: 8px;
+  --ymm-radius-md: 12px;
+  --ymm-shadow-soft: 0 8px 24px rgba(24, 46, 82, 0.08);
+  --ymm-font-sans: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --ymm-font-serif: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+
+  --el-color-primary: var(--ymm-primary);
+  --el-color-primary-light-3: #5d7fbc;
+  --el-color-primary-light-5: #8fa7d0;
+  --el-color-primary-light-7: #bdcae2;
+  --el-color-primary-light-8: #d7e0ee;
+  --el-color-primary-light-9: var(--ymm-primary-soft);
+  --el-color-primary-dark-2: var(--ymm-primary-strong);
+  --el-color-success: var(--ymm-success);
+  --el-color-danger: var(--ymm-danger);
+  --el-border-radius-base: var(--ymm-radius-sm);
+  --el-border-color: var(--ymm-line);
+  --el-border-color-light: var(--ymm-line-soft);
+  --el-text-color-primary: var(--ymm-ink);
+  --el-text-color-regular: var(--ymm-text);
+  --el-text-color-secondary: var(--ymm-muted);
+  --el-bg-color-page: var(--ymm-canvas);
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ymm-text);
+  background: var(--ymm-canvas);
+  font-family: var(--ymm-font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+::selection {
+  color: #fff;
+  background: var(--ymm-primary);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: #bcc8d9;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+:focus-visible {
+  outline-color: rgba(40, 89, 166, 0.34);
+}
+
+[type='text']:focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 0 1px transparent inset!important;
+}
+
+/* Element Plus follows the same blue-ink visual language as the user app. */
+.el-button {
+  border-radius: var(--ymm-radius-sm);
+  font-weight: 600;
+}
+
+.el-button--primary {
+  box-shadow: 0 4px 12px rgba(40, 89, 166, 0.14);
+}
+
+.el-input__wrapper,
+.el-select__wrapper,
+.el-textarea__inner,
+.el-date-editor.el-input__wrapper {
+  border-radius: var(--ymm-radius-sm);
+  background: #fbfcfe;
+  box-shadow: 0 0 0 1px var(--ymm-line) inset;
+}
+
+.el-input__wrapper:hover,
+.el-select__wrapper:hover,
+.el-textarea__inner:hover {
+  box-shadow: 0 0 0 1px #aebed4 inset;
+}
+
+.el-input__wrapper.is-focus,
+.el-select__wrapper.is-focused,
+.el-textarea__inner:focus {
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--ymm-primary) inset, 0 0 0 3px rgba(40, 89, 166, 0.08);
+}
+
+.el-dialog {
+  border: 1px solid var(--ymm-line);
+  border-radius: var(--ymm-radius-md);
+  box-shadow: 0 22px 60px rgba(18, 38, 70, 0.2);
+}
+
+.el-dialog__header {
+  margin-right: 0;
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid var(--ymm-line-soft);
+}
+
+.el-dialog__title {
+  color: var(--ymm-ink);
+  font-family: var(--ymm-font-serif);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.el-dialog__body {
+  padding: 22px;
+}
+
+.el-dialog__footer {
+  padding: 14px 22px 20px;
+}
+
+.el-table {
+  --el-table-border-color: var(--ymm-line-soft);
+  --el-table-header-bg-color: #f3f6fa;
+  --el-table-row-hover-bg-color: #f7faff;
+  --el-table-text-color: var(--ymm-text);
+  --el-table-header-text-color: #506078;
+}
+
+.el-table th.el-table__cell {
+  height: 46px;
+  font-weight: 700;
+}
+
+.el-table td.el-table__cell {
+  height: 50px;
+}
+
+.el-table .cell {
+  line-height: 1.45;
+}
+
+.el-pagination {
+  --el-pagination-button-bg-color: transparent;
+  --el-pagination-hover-color: var(--ymm-primary);
+}
+
+.el-tag {
+  border-radius: 6px;
+}
+
+/* Shared management-page surfaces. */
+.user-management,
+.role-management,
+.permission-management,
+.article-management,
+.channel-management,
+.topic-management {
+  min-height: calc(100vh - 168px);
+  color: var(--ymm-text);
+  background: transparent;
+}
+
+.search-and-actions,
+.user-list,
+.role-list,
+.permission-list,
+.article-list,
+.channel-list,
+.topic-list {
+  border: 1px solid var(--ymm-line) !important;
+  border-radius: var(--ymm-radius-md) !important;
+  background: var(--ymm-paper) !important;
+  box-shadow: 0 1px 0 rgba(23, 35, 59, 0.03) !important;
+}
+
+.search-and-actions {
+  position: relative;
+}
+
+.search-and-actions::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 0;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--ymm-primary);
+}
+
+.search-and-actions .text-base {
+  color: var(--ymm-ink);
+  font-family: var(--ymm-font-serif);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.table-container {
+  overflow: hidden auto !important;
+}
+
+.pagination-container {
+  border-top: 1px solid var(--ymm-line-soft);
+  background: #fbfcfe;
+}
+
+.el-overlay {
+  background: rgba(15, 27, 46, 0.54);
+  backdrop-filter: blur(5px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== 按钮间距优化：Element Plus 相邻独立按钮默认无间距，这里统一补充 ===== */
+
+/* 通用相邻按钮间距（工具栏、弹窗底部按钮等） */
+.el-button + .el-button {
+  margin-left: 10px;
+}
+
+/* 表格操作列内的小按钮适当收紧，避免撑宽操作列 */
+.el-table .el-button + .el-button {
+  margin-left: 8px;
+}
+
+/* el-button-group 内部按钮保持无间距（组件自带圆角衔接） */
+.el-button-group .el-button + .el-button {
+  margin-left: 0;
+}
